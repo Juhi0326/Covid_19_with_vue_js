@@ -1,11 +1,14 @@
 <template>
   <div>
-    <h1 class="display-1">Fejléc cím</h1>
+    <h1 class="display-1">{{ title }}</h1>
   </div>
 </template>
 <script>
 export default {
-  name: "Header"
+  name: "Header",
+  props: {
+    title: { type: String, default: null, required: false }
+  }
 };
 </script>
 <style scoped></style>

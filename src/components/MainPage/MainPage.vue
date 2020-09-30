@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <Header title="Covid Statisztikák" />
   </div>
 </template>
 <script>
