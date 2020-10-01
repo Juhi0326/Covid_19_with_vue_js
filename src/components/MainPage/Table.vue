@@ -1,0 +1,21 @@
+<template>
+  <div>Table</div>
+</template>
+<script>
+import axios from "../../../node_modules/axios";
+export default {
+  name: "Table",
+  mounted() {
+    axios
+      .get("https://api.thevirustracker.com/free-api?countryTotals=ALL")
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
+  components: {}
+};
+</script>
+<style scoped></style>
