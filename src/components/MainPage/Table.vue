@@ -1,6 +1,11 @@
 <template>
   <div class="">
-    <div></div>
+    <h1>Szűrés ország szerint</h1>
+    <input
+      type="text"
+      placeholder="írd be az országot, amit keresel"
+      v-model="nameFilter"
+    />
     <div class="tablazat">
       <table class="table-striped">
         <thead>
@@ -17,7 +22,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(x, index) in list" v-bind:key="index">
+          <tr v-for="(x, index) in FilterCounty" v-bind:key="index">
             <td>{{ x.title }}</td>
             <td>{{ x.total_cases }}</td>
             <td>{{ x.total_recovered }}</td>
@@ -37,7 +42,9 @@ export default {
   name: "Table",
   data() {
     return {
+      nameFilter: "",
       list: [],
+      szurtLista: [],
       adathalmaz: {},
       asc: false,
       ascCountry: false,
@@ -141,6 +148,25 @@ export default {
     }
   },
 
+  computed: {
+    FilterCounty() {
+      return this.list.filter(item => {
+        return JSON.stringify(item).includes(this.nameFilter);
+      });
+    }
+  },
+  filters: {
+    capitalize: function(value) {
+      if (!value) return "";
+      value = value.toString();
+      return value.charAt(0).toUpperCase() + value.slice(1);
+    },
+    uppercase: function(value) {
+      if (!value) return "";
+      value = value.toString();
+      return value.toUpperCase();
+    }
+  },
   components: {}
 };
 </script>
@@ -148,5 +174,8 @@ export default {
 .tablazat {
   display: flex;
   justify-content: center;
+}
+input {
+  width: 25%;
 }
 </style>
