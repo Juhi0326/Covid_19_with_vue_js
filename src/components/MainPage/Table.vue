@@ -5,7 +5,7 @@
       <table class="table-striped">
         <thead>
           <tr>
-            <th scope="col">Ország</th>
+            <th scope="col" @click="sortByCountries()">Ország</th>
             <th scope="col" @click="sortByAllCases()">Esetek száma</th>
             <th scope="col">Felgyógyultak</th>
             <th scope="col">Elhunytak</th>
@@ -37,7 +37,8 @@ export default {
     return {
       list: [],
       adathalmaz: {},
-      asc: false
+      asc: false,
+      ascCountry: false
     };
   },
   mounted() {
@@ -45,7 +46,6 @@ export default {
       .get("https://api.thevirustracker.com/free-api?countryTotals=ALL")
       .then(res => {
         this.list = [...this.list, res.data];
-        console.log(this.list);
         this.adathalmaz = this.list[0];
         this.list = Object.values(this.adathalmaz.countryitems[0]);
       })
@@ -55,14 +55,28 @@ export default {
   },
   methods: {
     sortByAllCases() {
-      const sortable = Object.values(this.adathalmaz.countryitems[0]);
-      this.list = sortable;
       if (this.asc === true) {
         this.list.sort((a, b) => b.total_cases - a.total_cases);
         this.asc = false;
       } else {
         this.list.sort((a, b) => a.total_cases - b.total_cases);
         this.asc = true;
+      }
+    },
+    sortByCountries() {
+      console.log(this.list);
+      if (this.ascCountry === true) {
+        this.list.sort((a, b) =>
+          a.title > b.title ? 1 : b.title > a.title ? -1 : 0
+        );
+        this.ascCountry = false;
+        console.log(this.list);
+      } else {
+        this.list.sort((a, b) =>
+          b.title > a.title ? 1 : a.title > b.title ? -1 : 0
+        );
+        this.ascCountry = true;
+        console.log(this.list);
       }
     }
   },
