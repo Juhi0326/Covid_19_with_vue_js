@@ -9,9 +9,11 @@
             <th scope="col" @click="sortByAllCases()">Esetek száma</th>
             <th scope="col" @click="sortByRecovered()">Felgyógyultak</th>
             <th scope="col" @click="sortByDeaths()">Elhunytak</th>
-            <th scope="col">Mai esetek száma</th>
-            <th scope="col">Mai elhunytak száma</th>
-            <th scope="col">Aktív esetek</th>
+            <th scope="col" @click="sortByDailyCases()">Mai esetek száma</th>
+            <th scope="col" @click="sortByDailyDeaths()">
+              Mai elhunytak száma
+            </th>
+            <th scope="col" @click="sortByDailyActiveCases()">Aktív esetek</th>
           </tr>
         </thead>
         <tbody>
@@ -40,7 +42,10 @@ export default {
       asc: false,
       ascCountry: false,
       ascRecovered: false,
-      ascDeaths: false
+      ascDeaths: false,
+      ascDailyCases: false,
+      ascDailyDeaths: false,
+      ascActiveCases: false
     };
   },
   mounted() {
@@ -97,6 +102,41 @@ export default {
       } else {
         this.list.sort((a, b) => a.total_deaths - b.total_deaths);
         this.ascDeaths = true;
+      }
+    },
+    sortByDailyCases() {
+      if (this.ascDailyCases === true) {
+        this.list.sort(
+          (a, b) => b.total_new_cases_today - a.total_new_cases_today
+        );
+        this.ascDailyCases = false;
+      } else {
+        this.list.sort(
+          (a, b) => a.total_new_cases_today - b.total_new_cases_today
+        );
+        this.ascDailyCases = true;
+      }
+    },
+    sortByDailyDeaths() {
+      if (this.ascDailyDeaths === true) {
+        this.list.sort(
+          (a, b) => b.total_new_deaths_today - a.total_new_deaths_today
+        );
+        this.ascDailyDeaths = false;
+      } else {
+        this.list.sort(
+          (a, b) => a.total_new_deaths_today - b.total_new_deaths_today
+        );
+        this.ascDailyDeaths = true;
+      }
+    },
+    sortByDailyActiveCases() {
+      if (this.ascActiveCases === true) {
+        this.list.sort((a, b) => b.total_active_cases - a.total_active_cases);
+        this.ascActiveCases = false;
+      } else {
+        this.list.sort((a, b) => a.total_active_cases - b.total_active_cases);
+        this.ascActiveCases = true;
       }
     }
   },
