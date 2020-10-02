@@ -7,8 +7,8 @@
           <tr>
             <th scope="col" @click="sortByCountries()">Ország</th>
             <th scope="col" @click="sortByAllCases()">Esetek száma</th>
-            <th scope="col">Felgyógyultak</th>
-            <th scope="col">Elhunytak</th>
+            <th scope="col" @click="sortByRecovered()">Felgyógyultak</th>
+            <th scope="col" @click="sortByDeaths()">Elhunytak</th>
             <th scope="col">Mai esetek száma</th>
             <th scope="col">Mai elhunytak száma</th>
             <th scope="col">Aktív esetek</th>
@@ -38,7 +38,9 @@ export default {
       list: [],
       adathalmaz: {},
       asc: false,
-      ascCountry: false
+      ascCountry: false,
+      ascRecovered: false,
+      ascDeaths: false
     };
   },
   mounted() {
@@ -77,6 +79,24 @@ export default {
         );
         this.ascCountry = true;
         console.log(this.list);
+      }
+    },
+    sortByRecovered() {
+      if (this.ascRecovered === true) {
+        this.list.sort((a, b) => b.total_recovered - a.total_recovered);
+        this.ascRecovered = false;
+      } else {
+        this.list.sort((a, b) => a.total_recovered - b.total_recovered);
+        this.ascRecovered = true;
+      }
+    },
+    sortByDeaths() {
+      if (this.ascDeaths === true) {
+        this.list.sort((a, b) => b.total_deaths - a.total_deaths);
+        this.ascDeaths = false;
+      } else {
+        this.list.sort((a, b) => a.total_deaths - b.total_deaths);
+        this.ascDeaths = true;
       }
     }
   },
