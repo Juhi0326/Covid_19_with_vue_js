@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-flutid col">
     <Header title="Covid Statisztikák" />
     <Table />
   </div>

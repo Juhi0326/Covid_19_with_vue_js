@@ -1,13 +1,9 @@
 <template>
-  <div class="">
-    <h1>Szűrés ország szerint</h1>
-    <input
-      type="text"
-      placeholder="írd be az országot, amit keresel"
-      v-model="nameFilter"
-    />
-    <div class="tablazat">
-      <table class="table-striped">
+  <div class="col">
+    <h1 class="col">Szűrés ország szerint</h1>
+    <input class="col" type="text" placeholder="Keresés" v-model="nameFilter" />
+    <div class="col">
+      <table class="table-striped col">
         <thead>
           <tr>
             <th scope="col" @click="sortByCountries()">Ország</th>
@@ -178,7 +174,7 @@ export default {
   display: flex;
   justify-content: center;
 }
-input {
-  width: 25%;
-}
+/* input {
+  width: 100%;
+} */
 </style>
