@@ -1,7 +1,9 @@
 <template>
   <div class="col">
     <h1 class="col">Szűrés ország szerint</h1>
-    <input class="col" type="text" placeholder="Keresés" v-model="nameFilter" />
+    <input class="col-5" type="text" placeholder="Keresés" v-model="nameFilter" />
+    <br/>
+    <br/>
     <div class="col">
       <table class="table-striped col">
         <thead>
