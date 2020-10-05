@@ -24,12 +24,12 @@
         <tbody>
           <tr v-for="(x, index) in FilterCounty" v-bind:key="index">
             <td>{{ x.title }}</td>
-            <td>{{ x.total_cases }}</td>
-            <td>{{ x.total_recovered }}</td>
-            <td>{{ x.total_deaths }}</td>
-            <td>{{ x.total_new_cases_today }}</td>
-            <td>{{ x.total_new_deaths_today }}</td>
-            <td>{{ x.total_active_cases }}</td>
+            <td>{{ x.total_cases | numbers }}</td>
+            <td>{{ x.total_recovered | numbers }}</td>
+            <td>{{ x.total_deaths | numbers }}</td>
+            <td>{{ x.total_new_cases_today | numbers }}</td>
+            <td>{{ x.total_new_deaths_today | numbers }}</td>
+            <td>{{ x.total_active_cases | numbers }}</td>
           </tr>
         </tbody>
       </table>
@@ -165,6 +165,9 @@ export default {
       if (!value) return "";
       value = value.toString();
       return value.toUpperCase();
+    },
+    numbers: function(value) {
+      return parseFloat(value).toLocaleString("hu");
     }
   },
   components: {}
